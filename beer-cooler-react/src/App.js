@@ -5,10 +5,13 @@ import Navbar from "./components/Navbar";
 import BeerCoolerBoard from "./components/BeerCoolerBoard";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import AddBeer from './components/Beer/AddBeer';
+import {Provider} from "react-redux";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <Router>
       <div className="App">
         <Navbar />
@@ -17,6 +20,7 @@ class App extends Component {
         <Route exact path="/addBeer" component={AddBeer} />
       </div>
       </Router>
+      </Provider>
     );
   }
 }
