@@ -2,6 +2,30 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom"
 
 class AddBeer extends Component {
+    constructor(){
+        super();
+        this.state = {
+            name: "",
+            likes: "",
+            dislikes: ""
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+    
+    onChange(e){
+        this.setState({[e.target.name]:e.target.value})
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        const newBeer = {
+            name: "this.state.name",
+            likes: "this.state.likes",
+            dislikes: "this.state.dislikes"
+        };
+        console.log(newBeer);
+    }
     render() {
         return (
             <div className="addProjectTask">
@@ -13,18 +37,41 @@ class AddBeer extends Component {
                         </Link>
                         <p></p>
                         <h4 className="display-4 text-center">Add /Update Beer Record</h4>
-                        <form>
+                        <form onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <input type="text" className="form-control form-control-lg" name="name" placeholder="Name of Beer" />
+                                <input type="text" 
+                                className="form-control form-control-lg" 
+                                name="name" 
+                                value={this.state.name}
+                                placeholder="Name of Beer"
+                                onChange={this.onChange} />
                             </div>
-                            
                             <p></p>
-    
+                            {/* <h6>Edit Ratings: <input type="checkbox" id="chk-edit-likes-dislikes" onclick="disable_enable_edit_ld()" /> </h6> */}
                             <div className="form-group">
-                                <h6>Edit Ratings: <input type="checkbox" id="chk-edit-likes-dislikes" onclick="disable_enable_edit_ld()" /> </h6>
                                 <p></p>
-                                <p>Total Likes: <input type="number" className="form-control form-control-lg" placeholder="0" name="likes" id="num_likes" disabled/></p>
-                                <p>Total Dislikes: <input type="number" className="form-control form-control-lg" placeholder="0" name="dislikes" id="num_dislikes" disabled/></p>
+                                <h4>Edit Total Likes:</h4>
+                                <p> 
+                                    <input type="number" 
+                                    className="form-control form-control-lg" 
+                                    placeholder="0"
+                                    id="num_likes" 
+                                    name="likes"
+                                    value={this.state.likes} 
+                                    onChange={this.onChange} /></p>
+                            </div>
+
+                            <div className="form-group">
+                                <p></p>
+                                <h4>Edit Total Dislikes:</h4>
+                                <p> 
+                                    <input type="number" 
+                                    className="form-control form-control-lg" 
+                                    placeholder="0" 
+                                    id="num_dislikes"
+                                    name="dislikes"
+                                    value={this.state.dislikes}
+                                    onChange={this.onChange} /></p>
                             </div>
                             
                             <input type="submit" value="Submit Changes" className="btn btn-primary btn-block mt-4" />
@@ -32,9 +79,11 @@ class AddBeer extends Component {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
         );
     }
+
+    
 }
 
 
