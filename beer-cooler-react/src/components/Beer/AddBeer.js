@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addBeer} from "../../actions/beerActions";
+import classnames from "classnames"
 
 class AddBeer extends Component {
     constructor(){
@@ -10,12 +11,17 @@ class AddBeer extends Component {
         this.state = {
             name: "",
             likes: "",
-            dislikes: ""
+            dislikes: "",
+            errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-    
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({errors:nextProps.errors})
+        }
+    }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
         
@@ -32,8 +38,9 @@ class AddBeer extends Component {
         this.props.addBeer(newBeer, this.props.history)
     }
     render() {
+        const {errors} = this.state;
         return (
-            <div className="addProjectTask">
+            <div className="addBeer">
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
@@ -44,12 +51,21 @@ class AddBeer extends Component {
                         <h4 className="display-4 text-center">Add /Update Beer Record</h4>
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <input type="text" 
-                                className="form-control form-control-lg" 
-                                name="name" 
-                                value={this.state.name}
-                                placeholder="Name of Beer"
-                                onChange={this.onChange} />
+                                <input 
+                                    type="text" 
+                                    className={classnames("form-control form-control-lg", {
+                                        "is-invalid": errors.name
+                                    })} 
+                                    name="name" 
+                                    value={this.state.name}
+                                    placeholder="Name of Beer"
+                                    onChange={this.onChange} 
+                                />
+                                {
+                                    errors.name && (
+                                        <div className="invalid-feedback">{errors.name}</div>
+                                    )
+                                }
                             </div>
                             <p></p>
                             {/* <h6>Edit Ratings: <input type="checkbox" id="chk-edit-likes-dislikes" onclick="disable_enable_edit_ld()" /> </h6> */}

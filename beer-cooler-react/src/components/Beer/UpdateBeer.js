@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class UpdateBeer extends Component {
   render() {
     return (
-        <div className="addProjectTask">
+        <div className="addBeer">
         <div className="container">
             <div className="row">
                 <div className="col-md-8 m-auto">
