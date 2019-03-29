@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {addBeer} from "../../actions/beerActions";
 
 class AddBeer extends Component {
     constructor(){
@@ -15,16 +18,18 @@ class AddBeer extends Component {
     
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
+        
     }
 
     onSubmit(e){
         e.preventDefault();
         const newBeer = {
-            name: "this.state.name",
-            likes: "this.state.likes",
-            dislikes: "this.state.dislikes"
+            name: this.state.name,
+            likes: this.state.likes,
+            dislikes: this.state.dislikes
         };
-        console.log(newBeer);
+        // console.log(newBeer);
+        this.props.addBeer(newBeer, this.props.history)
     }
     render() {
         return (
@@ -82,11 +87,17 @@ class AddBeer extends Component {
         </div>    
         );
     }
-
-    
 }
 
+AddBeer.propTypes = {
+    addBeer: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+}
 
-export default AddBeer;
+const mapStateToProps = state => ({
+    errors: state.errors
+})
+
+export default connect(mapStateToProps, {addBeer}) (AddBeer);
 
   

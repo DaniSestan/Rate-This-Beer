@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
 public class Beer {
@@ -15,8 +16,11 @@ public class Beer {
     @NotBlank(message ="Beer brandname cannot be blank.")
     private String name;
     private String status;
-    private Integer likes;
-    private Integer dislikes;
+    private int likes;
+    private int dislikes;
+
+
+
 
 
     public Long getId() {
@@ -35,19 +39,27 @@ public class Beer {
         this.name = name;
     }
 
-    public Integer getLikes() {
+    public int getLikes() {
         return likes;
     }
 
-    public void setLikes(Integer likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
 
-    public Integer getDislikes() { return dislikes; }
+    public int getDislikes() {
+        return dislikes;
+    }
 
-    public void setDislikes(Integer dislikes) { this.dislikes = dislikes; }
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
 
-    public String getStatus() { return status; }
+    public String getStatus() {
+        return status;
+    }
 
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

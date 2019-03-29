@@ -11,26 +11,30 @@ public class BeerService {
     @Autowired
     private BeerRepository beerRepository;
 
+
+
     public Beer saveOrUpdateBeer(Beer beer){
 
-        if (beer.getLikes()== null){
+
+        if (((Integer)(beer.getLikes())== null)){
             beer.setLikes(0);
         }
-
-        if (beer.getDislikes()== null){
+        if (((Integer)(beer.getDislikes())== null)){
             beer.setDislikes(0);
         }
-
-        if ((beer.getLikes().intValue())>(beer.getDislikes().intValue())){
+        if ((beer.getLikes()) > beer.getDislikes()){
             beer.setStatus("LIQUID_GOLD");
         }
-        else if ((beer.getLikes().intValue())<(beer.getDislikes().intValue())){
+        else if ((beer.getLikes()) < beer.getDislikes()){
             beer.setStatus("SWILL");
         }
         else {
             beer.setStatus("ACCEPTABLE");
         }
 
+        System.out.println("TOTAL LIKES PRINTED:"+beer.getName());
+        System.out.println("TOTAL LIKES PRINTED:"+beer.getLikes());
+        System.out.println("TOTAL LIKES PRINTED:"+beer.getStatus());
         return beerRepository.save(beer);
 
     }
