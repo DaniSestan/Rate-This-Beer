@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom"
 import BeerRecord from './Beer/BeerRecord';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {getBacklog} from "../actions/beerActions";
 
 class BeerCoolerBoard extends Component {
+
+    componentDidMount(){
+        this.props.getBacklog();
+    }
     render() {
         return (
                 <div className="container">
@@ -82,4 +89,16 @@ class BeerCoolerBoard extends Component {
     }
 }
 
-export default BeerCoolerBoard;
+BeerCoolerBoard.propTypes = {
+    getBacklog: PropTypes.func.isRequired,
+    beer_records: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    beer_records: state.beer_record
+});
+
+export default connect(
+    mapStateToProps, 
+    {getBacklog}
+    ) (BeerCoolerBoard);
