@@ -19,24 +19,22 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         preloadData();
     }
 
-
     protected void preloadData() {
-        Beer budWeiser = new Beer();
-        budWeiser.setName("Budweiser");
-        budWeiser.setLikes(2);
-        budWeiser.setDislikes(1);
 
         Beer miller = new Beer();
-        miller.setName("Miller");
-        miller.setLikes(4);
-        miller.setDislikes(7);
+        miller.setName("Miller High Life");
+        miller.setLikes(10);
+        miller.setDislikes(0);
+
+        Beer budWeiser = new Beer();
+        budWeiser.setName("Fat Tire");
+        budWeiser.setLikes(3);
+        budWeiser.setDislikes(0);
+
         beerService.saveOrUpdateBeer(budWeiser);
         beerService.saveOrUpdateBeer(miller);
-
     }
-
 }
