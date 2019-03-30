@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/coolerinventoryboard")
+@RequestMapping("/api/beer")
 @CrossOrigin
 public class BeerController {
 
@@ -39,12 +39,30 @@ public class BeerController {
         return new ResponseEntity<Beer>(newBeer, HttpStatus.CREATED);
     }
 
-    @GetMapping("/beer")
+    @PutMapping("/{beer_id}")
+    public ResponseEntity<?>updateBeerById(@Valid @RequestBody Beer updateBeer, BindingResult result, @PathVariable Long beer_id){
+
+        Beer updateBeerRecord = beerService.findById(beer_id);
+        if(updateBeerRecord == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        if (updateBeer.getName() == null){
+            updateBeer.setName(updateBeerRecord.getName());
+        }
+
+        updateBeer.setId(beer_id);
+        beerService.saveOrUpdateBeer(updateBeer);
+
+        return new ResponseEntity<Beer>(updateBeer, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
     public Iterable<Beer> getAllBeers(){
         return beerService.findAll();
     }
 
-    @GetMapping("beer/{beer_id}")
+    @GetMapping("/{beer_id}")
     public ResponseEntity<?> getBeerById(@PathVariable Long beer_id){
         Beer beerRequest = beerService.findById(beer_id);
         return new ResponseEntity<>(beerRequest, HttpStatus.OK);

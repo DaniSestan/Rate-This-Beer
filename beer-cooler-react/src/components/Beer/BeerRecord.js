@@ -19,7 +19,7 @@ class BeerRecord extends Component {
                 ID: {beer_record.id}
             </div>
             <div className="card-body bg-light">
-                <h5 className="card-title">{beer_record.name}</h5>
+                <h5 className="card-title">Beer Brand Name: {beer_record.name}</h5>
                
                 <p className="card-text text-truncate ">
                     Total Likes: {beer_record.likes}
@@ -29,9 +29,9 @@ class BeerRecord extends Component {
                     Total Dislikes: {beer_record.dislikes}
                 </p>
                
-                <a href="#" className="btn btn-primary">
+                <Link to = {`updateBeer/${beer_record.id}`} className="btn btn-primary">
                     View / Update
-                </a>
+                </Link>
 
                 <button className="btn btn-danger ml-4" onClick={this.onDeleteClick.bind(this, beer_record.id)}>
                     Delete

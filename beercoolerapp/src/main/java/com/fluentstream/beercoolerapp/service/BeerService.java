@@ -32,9 +32,6 @@ public class BeerService {
             beer.setStatus("DRINK_AT_YOUR_OWN_RISK");
         }
 
-        System.out.println("TOTAL LIKES PRINTED:"+beer.getName());
-        System.out.println("TOTAL LIKES PRINTED:"+beer.getLikes());
-        System.out.println("TOTAL LIKES PRINTED:"+beer.getStatus());
         return beerRepository.save(beer);
 
     }
