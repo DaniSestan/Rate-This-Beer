@@ -29,7 +29,7 @@ public class BeerService {
             beer.setStatus("SWILL");
         }
         else {
-            beer.setStatus("ACCEPTABLE");
+            beer.setStatus("DRINK_AT_YOUR_OWN_RISK");
         }
 
         System.out.println("TOTAL LIKES PRINTED:"+beer.getName());

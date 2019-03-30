@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_BEER_RECORDS } from "./types"
+import { GET_ERRORS, GET_BEER_RECORDS, DELETE_BEER } from "./types"
 
 
 export const addBeer = (beer_record, history) => async dispatch => {
@@ -23,5 +23,19 @@ export const getBacklog = () => async dispatch => {
     dispatch({
         type:GET_BEER_RECORDS,
         payload:res.data
-    })
-}
+    });
+};
+
+export const deleteBeer = beer_id => async dispatch => {
+    if (
+      window.confirm(
+        `You are deleting the beer record (ID: ${beer_id}), this action cannot be undone.`
+      )
+    ) {
+      await axios.delete(`http://localhost:8080/api/coolerinventoryboard/${beer_id}`);
+      dispatch({
+        type: DELETE_BEER,
+        payload: beer_id
+      });
+    }
+  };

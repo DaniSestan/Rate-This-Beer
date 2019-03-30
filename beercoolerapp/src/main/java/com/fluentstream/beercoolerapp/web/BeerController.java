@@ -49,7 +49,7 @@ public class BeerController {
         Beer beerRequest = beerService.findById(beer_id);
         return new ResponseEntity<>(beerRequest, HttpStatus.OK);
     }
-    @DeleteMapping("beer/{beer_id}")
+    @DeleteMapping("/{beer_id}")
     public ResponseEntity<?> deleteBeer(@PathVariable Long beer_id){
         beerService.delete(beer_id);
         return new ResponseEntity<String>("Beer deleted", HttpStatus.OK);
